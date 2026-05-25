@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  service1:
+    image: microservices-demo-service1
+    build: ./service1
+    deploy:
+      replicas: 2
+    networks:
+      - swarm-net
+
+  service2:
+    image: microservices-demo-service2
+    build: ./service2
+    deploy:
+      replicas: 2
+    networks:
+      - swarm-net
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    deploy:
+      replicas: 1
+    networks:
+      - swarm-net
+
+networks:
+  swarm-net:
+    driver: overlay
