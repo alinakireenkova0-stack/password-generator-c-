@@ -1,0 +1,26 @@
+services:
+  generator:
+    build: ./generator
+    command: /app/generator
+    restart: always
+
+  service1:
+    build: ./service1
+    command: /app/service1
+    restart: always
+    volumes:
+      - ./generator:/generator
+      - ./generator:/app/generator
+
+  service2:
+    build: ./service2
+    command: /app/service2
+    restart: always
+    volumes:
+      - ./data:/data
+
+  nginx:
+    build: ./nginx
+    ports:
+      - "80:80"
+    restart: always
