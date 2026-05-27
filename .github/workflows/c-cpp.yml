@@ -1,4 +1,4 @@
-name: C++ with Make
+name: Fast Build
 
 on:
   push:
@@ -9,14 +9,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Клонирование репозитория
-      uses: actions/checkout@v3
+    - uses: actions/checkout@v3
 
-    - name: Установка компилятора
-      run: sudo apt-get install -y g++
-
-    - name: Сборка проекта
+    - name: Компиляция
       run: g++ generator/main.cpp -o app
 
-    - name: Запуск программы
+    - name: Запуск
       run: ./app
